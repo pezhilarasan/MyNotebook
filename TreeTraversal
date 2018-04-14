@@ -1,0 +1,56 @@
+#Tree Traversal 
+
+
+#In-order: Left-root-right
+#Pre-order: Root-left-right
+#Post-order: Left-right-root
+
+class Node:
+    def __init__(self,key):
+        self.left=None
+        self.right=None
+        self.value=key
+        
+        
+def inorder(root):
+    if(root.left):
+        inorder(root.left)
+    
+    print(root.value)
+    if(root.right):
+        inorder(root.right)
+        
+def preorder(root):
+    if root:
+        print(root.value)
+    if root.left:
+        preorder(root.left)
+    if root.right:
+        preorder(root.right)
+        
+def postorder(root):
+    if root.left:
+        postorder(root.left)
+    if root.right:
+        postorder(root.right)
+    print(root.value)
+        
+        
+#Driver code:
+root=Node(1)
+root.left=Node(2)
+root.left.left=Node(4)
+root.left.right=Node(5)
+root.right=Node(3)
+print('in')
+
+inorder(root)
+print('pre')
+preorder(root)
+
+print('post')
+postorder(root)
+        
+    
+    
+    
