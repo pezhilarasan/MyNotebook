@@ -1,0 +1,46 @@
+
+class NestedIterator(object):
+
+    def __init__(self, nestedList):
+        """
+        Initialize your data structure here.
+        :type nestedList: List[NestedInteger]
+        """
+        self.stack=[[nestedList,0]]
+        
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        if self.hasNext():
+            l, idx=self.stack.pop()
+            return l.getInteger()
+        
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        while self.stack:
+            l, idx = self.stack[-1]
+            if type(l) is NestedInteger and l.isInteger():
+                return True
+            else:
+                if type(l) is NestedInteger and idx < len(l.getList()): 
+                    self.stack[-1][1] += 1
+                    self.stack.append([l.getList()[idx], 0])
+                # the first added element in self.__init__ is a pure list    
+                elif type(l) is list and idx < len(l):
+                    self.stack[-1][1] += 1
+                    self.stack.append([l[idx], 0])
+                else:
+                    # pop the element if the idx, the next position to explore, has already
+                    # exceeded the length of the element
+                    self.stack.pop()
+        return False
+        
+
+# Your NestedIterator object will be instantiated and called as such:
+# i, v = NestedIterator(nestedList), []
+# while i.hasNext(): v.append(i.next())
