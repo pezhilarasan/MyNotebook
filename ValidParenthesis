@@ -18,4 +18,3 @@ class Solution:
             return False
         else:
             return True
-复制代码
