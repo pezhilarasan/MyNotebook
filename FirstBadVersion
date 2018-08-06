@@ -1,21 +1,16 @@
 class Solution(object):
-    def search(self, st, ed, res):
-        if st > ed:
-            return
-        else:
-            mid = st + (ed-st)/2
-            tmp = isBadVersion(mid)
-            if tmp:
-                res[0] = mid
-                self.search(st, mid-1, res)
-            else:
-                self.search(mid+1, ed, res)
+   
         
     def firstBadVersion(self, n):
         """
         :type n: int
         :rtype: int
         """
-        res = [n]
-        self.search(1,n,res)
-        return res[0]
+       left, right = 1, n
+        while left <= right:
+            mid = (left + right) / 2
+            if isBadVersion(mid):
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
